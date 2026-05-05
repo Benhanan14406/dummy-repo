@@ -1,11 +1,9 @@
 import Link from "next/link";
-import Navbar from "@/component/navbar";
+import Navbar from "@/components/navbar";
 
 export default function Dashboard_penjual() {
   return (
     <div className="min-h-screen bg-slate-50">
-      <Navbar />
-
       <main className="pt-[130px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div>
