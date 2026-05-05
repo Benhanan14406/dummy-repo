@@ -7,7 +7,6 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-<<<<<<< HEAD
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
@@ -62,9 +61,7 @@
   --text-c-l: 14px;
   --text-c-r: 12px;
   --text-c-s: 10px;
-=======
   --font-sans: var(--font-poppins);
->>>>>>> d0834fbe7ea07e168361c909f2ccf8b96079f3b0
 }
 
 :root {
