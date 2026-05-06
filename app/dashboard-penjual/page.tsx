@@ -15,7 +15,7 @@ export default function Dashboard_penjual() {
             </p>
           </div>
           <Link
-            href="/buat-proyek"
+            href="/create-project"
             className="inline-flex items-center justify-center rounded-[8px] bg-blue-600 px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
           >
             + Buat Proyek Baru

@@ -35,7 +35,7 @@ export default function Navbar(){
                         Dashboard Penjual
                     </Link>
 
-                    <Link href='/mrv' className="hover: hover:underline transition-colors">
+                    <Link href='/create-project' className="hover: hover:underline transition-colors">
                         Buat Proyek (MRV)
                     </Link>
                 </div>
