@@ -3,15 +3,20 @@ import { useState } from "react";
 import SetUp from "@/sections/create-project/setup";
 import Data from "@/sections/create-project/data";
 import Risk from "@/sections/create-project/risk";
-import { MetodologiType, FormStateSetter, StepType } from "@/interfaces/interface";
+import { MetodologiType, FormStateSetter, StepType, RisikoType } from "@/interfaces/interface";
 
 function InputStep({ step, formStateSetters }: { step: number, formStateSetters: FormStateSetter })
 {
     const setUpParams = formStateSetters.setUpParams;
     const dataParams = formStateSetters.dataParams;
+    const riskParams = formStateSetters.riskParams;
     const setStep = formStateSetters.setStep
 
-    const Forms = [<SetUp stateSetters={setUpParams} setStep={setStep}/>, <Data stateSetters={dataParams} setStep={setStep}/>, <Risk />]
+    const Forms = [
+        <SetUp stateSetters={setUpParams} setStep={setStep}/>, 
+        <Data stateSetters={dataParams} setStep={setStep}/>, 
+        <Risk stateSetters={riskParams} setStep={setStep}/>
+    ]
 
     return (
         <div className="flex flex-col gap-10 mt-30 w-305">
@@ -41,8 +46,6 @@ export default function CreateProject()
 
     const [step, setStep] = useState<StepType>(0);
 
-    const methodologies = ["VM0033 (Verra Blue Carbon)", "AR-ACM0003 (A/R CDM)"];
-
     const namaProyekProps = useState("");
     const luasAreaProps = useState(0);
     const deforestasiProps = useState(0);
@@ -53,11 +56,16 @@ export default function CreateProject()
     const avgTinggiProps = useState(0);
     const rtsRatioProps = useState(0);
     const carbonProps = useState(0);
+    const grossCarbonProps = useState(0);
+
+    const risikoProps = useState<RisikoType>("Sedang (Medium Risk) - 15% Buffer Deduction");
+    const dokumenProps = useState("");
+    const creditProps = useState(0);
     
     const formStateSetters: FormStateSetter = {
         setUpParams: {namaProyekProps, luasAreaProps, deforestasiProps, metodologiProps},
-        dataParams: {jumlahPohonProps, avgDbhProps, avgTinggiProps, rtsRatioProps, carbonProps},
-        riskParams: {},
+        dataParams: {jumlahPohonProps, avgDbhProps, avgTinggiProps, rtsRatioProps, carbonProps, grossCarbonProps},
+        riskParams: {risikoProps, dokumenProps, creditProps},
         setStep,
     }
 
