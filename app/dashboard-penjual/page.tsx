@@ -1,5 +1,7 @@
 import Link from "next/link";
-import Navbar from "@/components/navbar";
+import { Wallet } from 'lucide-react';
+import { TrendingUp } from 'lucide-react';
+import { LayoutGrid } from 'lucide-react';
 
 export default function Dashboard_penjual() {
   return (
@@ -7,42 +9,54 @@ export default function Dashboard_penjual() {
       <main className="pt-[130px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-3xl font-semibold text-slate-900">Dashboard Penjual</h1>
+            <h1 className="text-3xl font-bold text-slate-900">Dashboard Penjual</h1>
             <p className="mt-3 max-w-2xl text-sm text-slate-600">
               Kelola portofolio proyek karbon, inventaris kredit, dan performa penjualan Anda.
             </p>
           </div>
           <Link
             href="/buat-proyek"
-            className="inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
+            className="inline-flex items-center justify-center rounded-[8px] bg-blue-600 px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
           >
             + Buat Proyek Baru
           </Link>
         </div>
 
         <section className="mt-10 grid gap-4 md:grid-cols-3">
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div className="flex items-center justify-between">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100 text-slate-700">💰</div>
-              <span className="text-xs uppercase tracking-[0.2em] text-slate-400">Total Pendapatan</span>
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm flex flex-row items-center">
+            <div className="flex items-center justify-center bg-[#DBEAFE] w-[70px] h-[70px] rounded-full">
+              <Wallet color="#2563EB" strokeWidth={3}/>
             </div>
-            <p className="mt-8 text-3xl font-semibold text-slate-900">$112,500</p>
+            <div className="ml-5">
+              <span className="text-xs uppercase tracking-[0.2em] ">Total Pendapatan</span>
+              <p className=" text-3xl font-bold text-slate-900">$112,500</p>
+            </div>
           </div>
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div className="flex items-center justify-between">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700">📈</div>
-              <span className="text-xs uppercase tracking-[0.2em] text-slate-400">Kredit Terjual</span>
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm flex flex-row items-center">
+            <div className="flex items-center justify-center bg-[#D1FAE5] w-[70px] h-[70px] rounded-full">
+              <TrendingUp color="#059669" strokeWidth={3}/>
             </div>
-            <p className="mt-8 text-3xl font-semibold text-slate-900">7,500 <span className="text-base font-medium text-slate-500">tCO₂e</span></p>
+            <div className="ml-5">
+              <span className="text-xs uppercase tracking-[0.2em] ">Kredit Terjual</span>
+              <div className="flex flex-row">
+                <p className=" text-3xl font-bold text-slate-900">2,500</p>
+                <span className="mt-4 ml-2 text-xs uppercase tracking-[0.2em] text-slate-400">tCO₂e</span>
+              </div>
+            </div>
           </div>
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div className="flex items-center justify-between">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100 text-slate-700">🗂️</div>
-              <span className="text-xs uppercase tracking-[0.2em] text-slate-400">Total Proyek</span>
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm flex flex-row items-center">
+            <div className="flex items-center justify-center bg-[#E0E7FF] w-[70px] h-[70px] rounded-full">
+              <LayoutGrid color="#736EEC" strokeWidth={3}/>
             </div>
-            <p className="mt-8 text-3xl font-semibold text-slate-900">2 <span className="text-base font-medium text-slate-500">Proyek</span></p>
+            <div className="ml-5">
+              <span className="text-xs uppercase tracking-[0.2em] ">Total Proyek </span>
+              <div className="flex flex-row">
+                <p className=" text-3xl font-bold text-slate-900">1</p>
+                <span className="mt-4 ml-2 text-xs uppercase tracking-[0.2em] text-slate-400">proyek</span>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -79,7 +93,7 @@ export default function Dashboard_penjual() {
                   </span>
                 </div>
                 <div className="font-semibold text-slate-900">$15</div>
-                <div>
+                <div className="max-w-[180px]">
                   <div className="mb-2 flex items-center justify-between text-xs text-slate-500">
                     <span>12,500</span>
                     <span>20,000</span>
@@ -89,7 +103,7 @@ export default function Dashboard_penjual() {
                   </div>
                 </div>
                 <div>
-                  <Link href="/dashboard-penjual" className="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 transition hover:text-blue-800">
+                  <Link href="/dashboard-penjual/restorasi-mangrove-teluk-kelabat" className="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 transition hover:text-blue-800">
                     Kelola <span aria-hidden="true">→</span>
                   </Link>
                 </div>
