@@ -1,7 +1,6 @@
-import Image from "next/image";
-import Hero from "../sections/landing/hero";
-import Why from "../sections/landing/why";
-import Solution from "../sections/landing/solution";
+import Hero from "@/sections/landing/hero";
+import Why from "@/sections/landing/why";
+import Solution from "@/sections/landing/solution";
 
 export default function Home() {
   return (

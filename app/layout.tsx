@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { poppins } from "@/utils/font";
 import Navbar from "@/components/navbar";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans bg-surface">
         <Navbar />
-        {children}
+        <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>
   );
