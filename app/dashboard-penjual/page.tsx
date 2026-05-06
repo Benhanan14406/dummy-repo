@@ -69,8 +69,8 @@ export default function Dashboard_penjual() {
 
           <div className="overflow-hidden rounded-3xl border border-slate-200">
             <div className="bg-slate-50 px-5 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
-              <div className="grid grid-cols-[minmax(220px,_1fr)_120px_120px_220px_96px] items-center gap-4">
-                <span>Nama Proyek</span>
+              <div className="grid grid-cols-[minmax(180px,_1fr)_120px_120px_220px_96px] items-center gap-4 ">
+                <span className="text-center items-center whitespace-nowrap">Nama Proyek</span>
                 <span>Status</span>
                 <span>Harga/Ton</span>
                 <span>Inventaris (Tersedia)</span>
@@ -79,16 +79,16 @@ export default function Dashboard_penjual() {
             </div>
 
             <div className="px-5 py-4">
-              <div className="grid grid-cols-[minmax(220px,_1fr)_120px_120px_220px_96px] items-center gap-4 border-t border-slate-200 py-4">
+              <div className="grid grid-cols-[minmax(180px,_1fr)_120px_120px_220px_96px] items-center gap-4 border-t border-slate-200 py-4">
                 <div className="flex items-center gap-4">
-                  <div className="h-14 w-14 rounded-3xl bg-slate-100" />
+                  <img className="h-14 w-14 rounded-[8px] bg-slate-100" src="images/gambar_mangrove.png"/>
                   <div>
                     <p className="font-semibold text-slate-900">Restorasi Mangrove Teluk Kelabat</p>
                     <p className="text-sm text-slate-500">Blue Carbon / ARR</p>
                   </div>
                 </div>
                 <div>
-                  <span className="inline-flex rounded-full bg-blue-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-700">
+                  <span className="inline-flex rounded-full bg-blue-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-700 ">
                     Published
                   </span>
                 </div>
