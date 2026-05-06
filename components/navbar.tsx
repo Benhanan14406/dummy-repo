@@ -22,7 +22,6 @@ export default function Navbar(){
                     />
                 </Link>
                 <div className="flex flex-row justify-end items-center gap-20 mr-10">
-
                     <Link href='/beli-kredit' className="hover: hover:underline transition-colors">
                         Beli Kredit
                     </Link>
@@ -35,7 +34,7 @@ export default function Navbar(){
                         Dashboard Penjual
                     </Link>
 
-                    <Link href='/mrv' className="hover: hover:underline transition-colors">
+                    <Link href='/create-project' className="hover: hover:underline transition-colors">
                         Buat Proyek (MRV)
                     </Link>
                 </div>
