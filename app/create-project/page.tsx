@@ -1,9 +1,10 @@
 "use client"
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import SetUp from "@/sections/create-project/setup";
 import Data from "@/sections/create-project/data";
 import Risk from "@/sections/create-project/risk";
-import { MetodologiType, FormStateSetter, StepType, RisikoType } from "@/interfaces/interface";
+import Report from "@/sections/create-project/report";
+import { MetodologiType, FormStateSetter, StepType, RisikoType, ReportParams } from "@/interfaces/interface";
 
 function InputStep({ step, formStateSetters }: { step: number, formStateSetters: FormStateSetter })
 {
@@ -32,15 +33,6 @@ function InputStep({ step, formStateSetters }: { step: number, formStateSetters:
     );
 }
 
-function ReportStep()
-{
-    return (
-        <div>
-
-        </div>
-    );
-}
-
 export default function CreateProject()
 {
 
@@ -61,6 +53,16 @@ export default function CreateProject()
     const risikoProps = useState<RisikoType>("Sedang (Medium Risk) - 15% Buffer Deduction");
     const dokumenProps = useState("");
     const creditProps = useState(0);
+
+    const reportParams: ReportParams = {
+        luasProyek: luasAreaProps[0],
+        jumlahPohon: jumlahPohonProps[0],
+        avgDbh: avgDbhProps[0],
+        avgTinggi: avgTinggiProps[0],
+        rtsRatio: rtsRatioProps[0],
+        carbon: carbonProps[0],
+        credit: creditProps[0],
+    } 
     
     const formStateSetters: FormStateSetter = {
         setUpParams: {namaProyekProps, luasAreaProps, deforestasiProps, metodologiProps},
@@ -71,7 +73,7 @@ export default function CreateProject()
 
     return (
         <div className="flex justify-center">
-            {step < 3 ? <InputStep step={step} formStateSetters={formStateSetters}/> : <ReportStep />}
+            {step < 3 ? <InputStep step={step} formStateSetters={formStateSetters}/> : <Report setStep={setStep} reportParams={reportParams}/>}
         </div>
     );
 }

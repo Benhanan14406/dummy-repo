@@ -23,12 +23,11 @@ import { Upload } from 'lucide-react';
 
 export default function Risk({ stateSetters, setStep }: { stateSetters: RiskParams, setStep: Dispatch<SetStateAction<StepType>> })
 {
-    const { risikoProps, dokumenProps, creditProps } = stateSetters;
+    const { risikoProps, dokumenProps } = stateSetters;
     const risks = ["Rendah (Low Risk) - 10% Buffer Deduction", "Sedang (Medium Risk) - 15% Buffer Deduction", "Tinggi (High Risk) - 20% Buffer Deduction"];
 
     const [risiko, setRisiko] = risikoProps;
     const [dokumen, setDokumenProps] = dokumenProps;
-    const [credit, setCreditProps] = creditProps;
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -85,7 +84,7 @@ export default function Risk({ stateSetters, setStep }: { stateSetters: RiskPara
                             ref={fileInputRef}
                         />
                         <div 
-                            className="flex flex-col py-10 w-full gap-1 items-center border-dashed border-2 borger-[#94A3B8] bg-surface hover:bg-gray-100 rounded-[8px]"
+                            className="flex flex-col py-10 w-full gap-1 items-center border-dashed border-2 borger-[#94A3B8] bg-surface hover:bg-gray-100 rounded-[8px] hover:cursor-pointer"
                             onClick={() => fileInputRef.current?.click()}
                         >
                             <Upload className="size-16" color="#94A3B8"/>

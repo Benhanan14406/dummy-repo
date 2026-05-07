@@ -26,6 +26,16 @@ export interface RiskParams {
     creditProps: [number, Dispatch<SetStateAction<number>>],
 } 
 
+export interface ReportParams {
+    luasProyek: number,
+    jumlahPohon: number,
+    avgDbh: number,
+    avgTinggi: number,
+    rtsRatio: number,
+    carbon: number,
+    credit: number,
+}
+
 export interface FormStateSetter {
     setUpParams: SetUpParams,
     dataParams: DataParams,
