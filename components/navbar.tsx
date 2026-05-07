@@ -22,7 +22,7 @@ export default function Navbar(){
                     />
                 </Link>
                 <div className="flex flex-row justify-end items-center gap-20 mr-10">
-                    <Link href='/beli-kredit' className="hover: hover:underline transition-colors">
+                    <Link href='/dashboard-pembeli' className="hover: hover:underline transition-colors">
                         Beli Kredit
                     </Link>
 
