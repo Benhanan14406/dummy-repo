@@ -42,6 +42,8 @@ export default function Risk({ stateSetters, setStep }: { stateSetters: RiskPara
         setCredit(newCredit);
     }
 
+    setCredit(calcIssuableCredits(grossCarbon, riskPercentage));
+
     return (
         <div className="flex flex-col gap-7 mb-20">
             <Steps step={2}/>

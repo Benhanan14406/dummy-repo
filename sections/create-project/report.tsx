@@ -31,7 +31,7 @@ function ReportCardSubtitle({ title }: { title: string })
 
 function ReportCard({ reportParams }: { reportParams: ReportParams })
 {
-    const { luasProyek, jumlahPohon, avgDbh, avgTinggi, rtsRatio, carbon } = reportParams;
+    const { luasProyek, jumlahPohon, avgDbh, avgTinggi, rtsRatio, carbon, credit } = reportParams;
     return (
         <Card className="rounded-none shadow-lg w-full p-7 gap-7">
             <CardHeader className="flex flex-row justify-between w-full border-b border-text-primary px-0">
@@ -49,14 +49,14 @@ function ReportCard({ reportParams }: { reportParams: ReportParams })
                 <div className="flex flex-row gap-3 pb-10 pt-8 bg-surface justify-center border border-gray-400 rounded-[8px]">
                     <div className="flex flex-row gap-20">
                         <div className="flex flex-col gap-4">
-                            <ReportCardField name="Total Luas Proyek" value="10 Hektar"/>
-                            <ReportCardField name="Rata-rata DBH" value="15 cm"/>
-                            <ReportCardField name="Rasio Root-to-Shoot (BGB)" value="0.25"/>
+                            <ReportCardField name="Total Luas Proyek" value={`${luasProyek} Hektar`}/>
+                            <ReportCardField name="Rata-rata DBH" value={`${avgDbh} cm`}/>
+                            <ReportCardField name="Rasio Root-to-Shoot (BGB)" value={`${rtsRatio}`}/>
                         </div>
                         <div className="flex flex-col gap-4">
-                            <ReportCardField name="Jumlah Sample Pohon" value="500 Pohon"/>
-                            <ReportCardField name="Rata-rata tinggi pohon" value="8 m"/>
-                            <ReportCardField name="Kandungan SOC / Ha" value="200 tC"/>
+                            <ReportCardField name="Jumlah Sample Pohon" value={`${jumlahPohon} Pohon`}/>
+                            <ReportCardField name="Rata-rata tinggi pohon" value={`${avgTinggi} m`}/>
+                            <ReportCardField name="Kandungan SOC / Ha" value={`${carbon} tC`}/>
                         </div>
                     </div>
                 </div>
@@ -76,12 +76,12 @@ function ReportCard({ reportParams }: { reportParams: ReportParams })
                 <div className="flex flex-row w-full items-center justify-evenly bg-tertiary rounded-[16px] shadow-lg py-5">
                     <div className="flex flex-col gap-1 items-center">
                         <p className="text-text-secondary">ESTIMASI  TOTAL BIOMASA (C)</p>
-                        <p className="text-h3 font-bold text-white">1,878.4 tC</p>
+                        <p className="text-h3 font-bold text-white">{carbon} tC</p>
                     </div>
                     <ArrowRight className="size-9.5" color="#8EC1EF"/>
                     <div className="flex flex-col gap-1 items-center text-[#8EC1EF]">
                         <p>KREDIT KARBON DISETUJUI</p>
-                        <p className="text-h3 font-bold">6,894 tCO₂e</p>
+                        <p className="text-h3 font-bold">{credit} tCO₂e</p>
                     </div>
                 </div>
                 <CardFooter className="flex flex-row justify-between items-end px-0 bg-transparent">
