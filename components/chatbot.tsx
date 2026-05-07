@@ -4,6 +4,11 @@ import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import { Bot, X, SendHorizontal } from "lucide-react";
 import { Textarea } from "./ui/textarea";
+import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({
+    apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY
+});
 
 function Chat({ from, message }: { from: string, message: string })
 {
@@ -26,16 +31,52 @@ function Chat({ from, message }: { from: string, message: string })
     )
 }
 
-function BotCard({ setOpenBot, messageProps }: { setOpenBot: Dispatch<SetStateAction<boolean>>, messageProps: [string, Dispatch<SetStateAction<string>>] })
+function BotCard({ 
+        setOpenBot, 
+        messageProps, 
+        messagesProps 
+    }: { 
+        setOpenBot: Dispatch<SetStateAction<boolean>>, 
+        messageProps: [string, Dispatch<SetStateAction<string>>], 
+        messagesProps: [string[], Dispatch<SetStateAction<string[]>>] 
+    })
 {
-    const messages = [["TideBot", "Halo! Ada yang bisa aku bantu?"], ["You", "Gimana cara login?"]];
+    const [messages, setMessages] = messagesProps;
     const [message, setMessage] = messageProps;
 
+    const addNewMessage = (message: string) => {
+        const newMessages = messages.copyWithin(-1, -1);
+        newMessages.push(message);
+        setMessages(newMessages);
+    }
+
+    const answerMessage = async () => {
+        const content = `Kamu adalah chabot interaktif dari sebuah aplikasi. 
+                        Berikan aku langsung jawaban singkat (tidak terlalu singkat dan tidak terlalu panjang), 
+                        serta tanpa kalimat pembuka ataupun penutup, dari pertanyaan berikut ini: \"${message}\"`;
+
+        const response = await ai.models.generateContent({
+            model: "gemini-3-flash-preview",
+            contents: content,
+        })
+
+        const botMessage = response.text || "can't answer";
+        console.log(botMessage);
+
+        addNewMessage(botMessage);
+    }
+
+    const handleSend = async () => {
+        addNewMessage(message);
+        answerMessage();
+        setMessage("");
+    }
+
     const button = message === "" ?
-        <Button className="bg-gray-200 hover:bg-gray-300">
+        <Button className="bg-gray-200 hover:bg-gray-300" onClick={handleSend}>
             <SendHorizontal color="black"/>
         </Button> : 
-        <Button>
+        <Button onClick={handleSend}>
             <SendHorizontal color="white"/>
         </Button>
 
@@ -54,7 +95,7 @@ function BotCard({ setOpenBot, messageProps }: { setOpenBot: Dispatch<SetStateAc
                 </Button>
             </CardHeader>
             <CardContent className="flex flex-col gap-3 h-50 w-full">
-                {messages.map((message, index) => <Chat from={message[0]} message={message[1]} key={index}/>)}
+                {messages.map((message, index) => <Chat from={index % 2 === 0 ? "TideBot" : "You"} message={message} key={index}/>)}
             </CardContent>
             <CardFooter className="bg-white flex flex-col gap-3">
                 <Textarea value={message} placeholder="Type your question here." onChange={(e) => setMessage(e.target.value)}/>
@@ -83,11 +124,12 @@ function BotButton({ setOpenBot }: { setOpenBot: Dispatch<SetStateAction<boolean
 export default function ChatBot()
 {
     const [openBot, setOpenBot] = useState(false);
+    const messagesProps = useState(["Halo! Ada yang bisa aku bantu?"])
     const messageProps = useState("");
 
     return (
         <div className="fixed z-1 bottom-10 right-10 rounded-full shadow-lg">
-            {openBot ? <BotCard messageProps={messageProps} setOpenBot={setOpenBot}/> : <BotButton setOpenBot={setOpenBot}/>}
+            {openBot ? <BotCard messagesProps={messagesProps} messageProps={messageProps} setOpenBot={setOpenBot}/> : <BotButton setOpenBot={setOpenBot}/>}
         </div>
     );
 }
