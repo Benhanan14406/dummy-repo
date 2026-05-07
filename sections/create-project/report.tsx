@@ -9,6 +9,7 @@ import {
     CardFooter
 } from "@/components/ui/card";
 import { ancizarSerif } from "@/utils/font";
+import Link from "next/link";
 
 function ReportCardField( { name, value }: { name: string, value: string })
 {
@@ -119,10 +120,12 @@ export default function Report({ setStep, reportParams }: { setStep: Dispatch<Se
                     <p className="text-h1 font-bold">Laporan Verifikasi (Auto-Generated)</p>
                     <p className="text-sh-l">Draft dokumen hasil kalkulasi MRV sebelum diterbitkan ke inventaris.</p>
                 </div>
-                <Button className="w-52.5 h-12 hover:bg-blue-700">
-                    <p className="font-bold">Tambahkan Listing</p>
-                    <ArrowRight className="size-5"/>
-                </Button>
+                <Link href="/dashboard-penjual">
+                    <Button className="w-52.5 h-12 hover:bg-blue-700">
+                        <p className="font-bold">Tambahkan Listing</p>
+                        <ArrowRight className="size-5"/>
+                    </Button>
+                </Link>
             </div>
             <ReportCard reportParams={reportParams}/>
         </div>
