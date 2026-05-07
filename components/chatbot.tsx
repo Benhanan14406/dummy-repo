@@ -94,7 +94,7 @@ function BotCard({
                     <X color="black" className="size-7"/>
                 </Button>
             </CardHeader>
-            <CardContent className="flex flex-col gap-3 h-50 w-full">
+            <CardContent className="flex flex-col gap-3 h-50 overflow-y-auto w-full">
                 {messages.map((message, index) => <Chat from={index % 2 === 0 ? "TideBot" : "You"} message={message} key={index}/>)}
             </CardContent>
             <CardFooter className="bg-white flex flex-col gap-3">
