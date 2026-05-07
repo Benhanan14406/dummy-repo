@@ -67,12 +67,18 @@ export default function LoginPage() {
               </InputIcon>
             </FormField>
 
-            <button
+            {/* <button
               type="submit"
               className="mt-2 w-full rounded-2xl bg-primary py-3.5 text-c-l font-bold text-white shadow-md hover:opacity-90 transition active:scale-95 flex items-center justify-center gap-2"
             >
               Buat Akun →
-            </button>
+            </button> */}
+            <Link
+              href="/"
+              className="mt-2 w-full rounded-2xl bg-primary py-3.5 text-c-l font-bold text-white shadow-md hover:opacity-90 transition active:scale-95 flex items-center justify-center gap-2"
+            >
+              Buat Akun →
+            </Link>
           </form>
 
           <p className="mt-8 text-center text-c-l text-text-secondary">
