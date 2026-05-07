@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
-import { TrendingUp, ChartColumn, UsersRound } from "lucide-react";
+import { TrendingUp, ChartColumn } from "lucide-react";
 
 export default function Why()
 {

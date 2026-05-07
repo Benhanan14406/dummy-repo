@@ -3,6 +3,7 @@ import { poppins } from "@/utils/font";
 import Navbar from "@/components/navbar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
+import ChatBot from "@/components/chatbot";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,6 +22,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans bg-surface">
         <Navbar />
+        <ChatBot />
         <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>
