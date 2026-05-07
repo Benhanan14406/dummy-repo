@@ -98,7 +98,16 @@ function BotCard({
                 {messages.map((message, index) => <Chat from={index % 2 === 0 ? "TideBot" : "You"} message={message} key={index}/>)}
             </CardContent>
             <CardFooter className="bg-white flex flex-col gap-3">
-                <Textarea value={message} placeholder="Type your question here." onChange={(e) => setMessage(e.target.value)}/>
+                <Textarea 
+                    value={message} placeholder="Type your question here." 
+                    onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter" && !e.shiftKey) {
+                            e.preventDefault();
+                            handleSend();
+                        }
+                    }}
+                />
                 <div className="flex flex-row justify-between items-center w-full">
                     <p className="text-text-secondary">Click 'enter' to send the message</p>
                     {button}
