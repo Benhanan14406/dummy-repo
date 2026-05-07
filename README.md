@@ -2,16 +2,19 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+First, install needed dependencies: 
+```bash
+npm install
+```
 
+Then, create an .env file on the root of the project and insert:
+NEXT_PUBLIC_GEMINI_API_KEY=[YOUR GEMINI API KEY]
+
+*Note: You need to sign up to Goolge AI Studio (https://aistudio.google.com/) to get a Gemini API Key.
+
+Then, run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

@@ -17,15 +17,22 @@ import { CircleQuestionMark, ArrowRight } from 'lucide-react';
 import { DataParams, StepType } from "@/interfaces/interface";
 import Steps from "./steps";
 import { Dispatch, SetStateAction } from "react";
+import { calcBiomass, calcGrossCarbon } from "@/utils/util";
 
 export default function Data({ stateSetters, setStep }: { stateSetters: DataParams, setStep: Dispatch<SetStateAction<StepType>>})
 {
-    const { jumlahPohonProps, avgDbhProps, avgTinggiProps, rtsRatioProps, carbonProps } = stateSetters;
+    const { jumlahPohonProps, avgDbhProps, avgTinggiProps, rtsRatioProps, carbonProps, grossCarbonProps } = stateSetters;
     const [jumlahPohon, setJumlahPohon] = jumlahPohonProps;
     const [avgDbh, setAvgDbh] = avgDbhProps;
     const [avgTinggi, setAvgTinggi] = avgTinggiProps;
     const [rtsRatio, setRtsRatio] = rtsRatioProps;
     const [carbon, setCarbon] = carbonProps;
+    const [grossCarbon, setGrossCarbon] = grossCarbonProps;
+
+    const updateGrossCarbon = () => {
+        const biomass = calcBiomass(jumlahPohon, avgDbh, avgTinggi);
+        setGrossCarbon(calcGrossCarbon(biomass, rtsRatio, carbon));
+    };
 
     return (
         <div className="flex flex-col gap-7 mb-20">
@@ -60,7 +67,7 @@ export default function Data({ stateSetters, setStep }: { stateSetters: DataPara
                                             <Label htmlFor="jumlahPohon">Jumlah Pohon Dihitung</Label>
                                             <Input
                                                 id="jumlahPohon"
-                                                value={jumlahPohon}
+                                                value={jumlahPohon === 0 ? "" : jumlahPohon}
                                                 placeholder="Misal: 100" 
                                                 className="w-78 h-11 placeholder-text-secondary bg-white"
                                                 onChange={(e) => setJumlahPohon(Number(e.target.value))}
@@ -70,20 +77,30 @@ export default function Data({ stateSetters, setStep }: { stateSetters: DataPara
                                             <Label htmlFor="avgDbh">Rata-rata DBH (cm)</Label>
                                             <Input
                                                 id="avgDbh"
-                                                value={avgDbh}
+                                                value={avgDbh === 0 ? "" : avgDbh}
                                                 placeholder="Misal: 15" 
                                                 className="w-78 h-11 placeholder-text-secondary bg-white"
-                                                onChange={(e) => setAvgDbh(Number(e.target.value))}
+                                                onChange={(e) => {
+                                                    setAvgDbh(Number(e.target.value))
+                                                    updateGrossCarbon();
+                                                }}
+                                                type="number"
+                                                step={0.01}
                                             />
                                         </div>
                                         <div className="flex flex-col gap-1">
                                             <Label htmlFor="avgTinggi">Rata-rata Tinggi (m)</Label>
                                             <Input
                                                 id="avgTinggi"
-                                                value={avgTinggi}
+                                                value={avgTinggi === 0 ? "" : avgTinggi}
                                                 placeholder="Misal: 2.5" 
                                                 className="w-78 h-11 placeholder-text-secondary bg-white"
-                                                onChange={(e) => setAvgTinggi(Number(e.target.value))}
+                                                onChange={(e) => {
+                                                    setAvgTinggi(Number(e.target.value));
+                                                    updateGrossCarbon();
+                                                }}
+                                                type="number"
+                                                step={0.01}
                                             />
                                         </div>
                                     </div>
@@ -112,14 +129,19 @@ export default function Data({ stateSetters, setStep }: { stateSetters: DataPara
                                             </Label>
                                             <Input
                                                 id="rtsRatio"
-                                                value={rtsRatio}
+                                                value={rtsRatio === 0 ? "" : rtsRatio}
                                                 placeholder="Misal: 100" 
                                                 className="w-120 h-11 placeholder-text-secondary bg-white"
-                                                onChange={(e) => setRtsRatio(Number(e.target.value))}
+                                                onChange={(e) => {
+                                                    setRtsRatio(Number(e.target.value));
+                                                    updateGrossCarbon();
+                                                }}
+                                                type="number"
+                                                step={0.01}
                                             />
                                         </div>
                                         <div className="flex flex-col gap-1">
-                                            <Label htmlFor="rtsRatio" className="flex flex-row gap-2 items-center">
+                                            <Label htmlFor="carbon" className="flex flex-row gap-2 items-center">
                                                 <p>Kandungan Karbon Tanah (tC/ha)</p>
                                                 <Tooltip>
                                                     <TooltipTrigger>
@@ -134,11 +156,16 @@ export default function Data({ stateSetters, setStep }: { stateSetters: DataPara
                                                 </Tooltip>
                                             </Label>
                                             <Input
-                                                id="avgDbh"
-                                                value={avgDbh}
+                                                id="carbon"
+                                                value={carbon === 0 ? "" : carbon}
                                                 placeholder="Misal: 15" 
                                                 className="w-120 h-11 placeholder-text-secondary bg-white"
-                                                onChange={(e) => setCarbon(Number(e.target.value))}
+                                                onChange={(e) => {
+                                                    setCarbon(Number(e.target.value));
+                                                    updateGrossCarbon();
+                                                }}
+                                                type="number"
+                                                step={0.01}
                                             />
                                         </div>
                                     </div>
@@ -147,7 +174,7 @@ export default function Data({ stateSetters, setStep }: { stateSetters: DataPara
                         </div>
                         <div className="flex flex-col gap-3 justify-center pl-10 bg-tertiary shadow-lg h-30 rounded-[16px]">
                             <p className="text-c-l text-text-secondary">Total Gross Carbon Stock (AGB+BGB+SOC)</p>
-                            <p className="text-h3 font-bold text-white">8,110 tCO₂e</p>
+                            <p className="text-h3 font-bold text-white">{grossCarbon} tCO₂e</p>
                         </div>
                     </CardContent>
                     <CardFooter className="flex flex-row gap-5 w-full bg-transparent py-">

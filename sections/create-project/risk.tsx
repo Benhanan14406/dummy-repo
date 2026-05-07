@@ -1,3 +1,4 @@
+"use client"
 import { 
     Card,
     CardHeader,
@@ -9,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import Steps from "./steps";
 import { RiskParams, RisikoType, StepType } from "@/interfaces/interface";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { 
     Combobox,
@@ -20,16 +21,26 @@ import {
 import { Input } from "@/components/ui/input";
 import { useRef } from "react";
 import { Upload } from 'lucide-react';
+import { calcIssuableCredits } from "@/utils/util";
 
 export default function Risk({ stateSetters, setStep }: { stateSetters: RiskParams, setStep: Dispatch<SetStateAction<StepType>> })
 {
-    const { risikoProps, dokumenProps } = stateSetters;
+    const { risikoProps, dokumenProps, creditProps, grossCarbon } = stateSetters;
     const risks = ["Rendah (Low Risk) - 10% Buffer Deduction", "Sedang (Medium Risk) - 15% Buffer Deduction", "Tinggi (High Risk) - 20% Buffer Deduction"];
 
     const [risiko, setRisiko] = risikoProps;
     const [dokumen, setDokumenProps] = dokumenProps;
+    const [credit, setCredit] = creditProps;
+    const [riskPercentage, setRiskPercentage] = useState(15);
 
     const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const updateCredit = () => {
+        const newRiskPercentage = 10+5*risks.indexOf(risiko);
+        const newCredit = calcIssuableCredits(grossCarbon, newRiskPercentage);
+        setRiskPercentage(newRiskPercentage);
+        setCredit(newCredit);
+    }
 
     return (
         <div className="flex flex-col gap-7 mb-20">
@@ -46,7 +57,12 @@ export default function Risk({ stateSetters, setStep }: { stateSetters: RiskPara
                             <div className="flex flex-col gap-1 w-134">
                                 <Label htmlFor="">Tingkat Risiko (Permanence & Leakage)</Label>
                                 <Combobox items={risks}>
-                                    <ComboboxInput placeholder="Select a Methodology" value={risiko} className="w-full h-11"/>
+                                    <ComboboxInput 
+                                        placeholder="Select a Methodology" 
+                                        value={risiko} 
+                                        className="w-full h-11"
+                                        onChange={updateCredit}
+                                    />
                                     <ComboboxContent>
                                         {
                                             risks.map((risk, index) => (
@@ -66,15 +82,15 @@ export default function Risk({ stateSetters, setStep }: { stateSetters: RiskPara
                         <div className="flex flex-col w-full gap-4 bg-surface border-[#D9D9D9] border py-7 px-7 rounded-[8px]">
                             <div className="flex flex-row justify-between w-full">
                                 <p>Gross Carbon Stock:</p>
-                                <p className="font-bold">8,110 tCO₂e</p>
+                                <p className="font-bold">{grossCarbon} tCO₂e</p>
                             </div>
                             <div className="flex flex-row justify-between w-full text-[#D13458]">
-                                <p>Risk Buffer Deduction (15%):</p>
-                                <p className="font-bold">- 1,217 tCO₂e</p>
+                                <p>{risiko}</p>
+                                <p className="font-bold">{(-riskPercentage/100) * grossCarbon} tCO₂e</p>
                             </div>
                             <div className="flex flex-row justify-between w-full text-primary border-t pt-4">
                                 <p>Final Issuable Credits:</p>
-                                <p className="font-bold">6,894 tCO₂e</p>
+                                <p className="font-bold">{credit} tCO₂e</p>
                             </div>
                         </div>
                         <Input

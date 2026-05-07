@@ -24,6 +24,7 @@ export interface RiskParams {
     risikoProps: [RisikoType, Dispatch<SetStateAction<RisikoType>>],
     dokumenProps: [string, Dispatch<SetStateAction<string>>],
     creditProps: [number, Dispatch<SetStateAction<number>>],
+    grossCarbon: number,
 } 
 
 export interface ReportParams {

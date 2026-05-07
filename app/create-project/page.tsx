@@ -1,5 +1,5 @@
 "use client"
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import SetUp from "@/sections/create-project/setup";
 import Data from "@/sections/create-project/data";
 import Risk from "@/sections/create-project/risk";
@@ -67,7 +67,7 @@ export default function CreateProject()
     const formStateSetters: FormStateSetter = {
         setUpParams: {namaProyekProps, luasAreaProps, deforestasiProps, metodologiProps},
         dataParams: {jumlahPohonProps, avgDbhProps, avgTinggiProps, rtsRatioProps, carbonProps, grossCarbonProps},
-        riskParams: {risikoProps, dokumenProps, creditProps},
+        riskParams: {risikoProps, dokumenProps, creditProps, grossCarbon: grossCarbonProps[0]},
         setStep,
     }
 
